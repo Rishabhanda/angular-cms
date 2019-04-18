@@ -1,0 +1,8 @@
+<mat-divider style="border-top-width: 2px;"></mat-divider>
+<mat-dialog-content style="margin-top:20px;">
+<p>{{data.message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align='end'>
+  <button mat-raised-button color='primary'  [mat-dialog-close]="true" cdkFocusInitial>{{data.buttonOne}}</button>
+  <button mat-raised-button [routerLink]='data.buttonTwo == "Sign Up"?"/auth/signup":null' color='accent'  [mat-dialog-close]="true" cdkFocusInitial>{{data.buttonTwo}}</button>
+</mat-dialog-actions>

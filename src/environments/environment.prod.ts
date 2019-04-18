@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,  apiUrl: 'http://phpcms.co.nf/api/'
+  // apiUrl: 'http://localhost/ngphpcms/api/'
 };

@@ -1,0 +1,18 @@
+<div fxLayout='row' fxLayoutAlign.sm='center' fxLayoutAlign.xs='center'>
+    <div  fxShow fxHide.md='false' fxHide.sm='true' fxHide.xs='true' fxFlex.gt-sm='10%' style='background-color:#fafafa; height:100vh;'>
+        <div fxLayout='column'>
+            <a mat-button routerLink='./' style='padding:15px 20px;'>Dashboard</a>
+            <a mat-button routerLink='./posts' style='padding:15px 20px;'>Posts</a>
+            <a mat-button routerLink='./categories' style='padding:15px 20px;'>Categories</a>
+            <a mat-button routerLink='./users' style='padding:15px 20px;'>Users</a>
+        </div>
+    </div>
+    <div fxFlex.xs='96%' fxFlex.gt-sm='90%'>
+        <br>
+        <div class='margin-setter'>
+            <p class='mat-display-1' style="margin-bottom:0px;">Welcome to Admin</p>
+            <mat-divider style="border-top-width: 2px;"></mat-divider>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.width-setter{
+    width: 80%;
+}
+
+div mat-form-field{
+    width: 100%;
+}
+
+@media screen and (min-width: 960px){
+    .width-setter{
+        width:60%;
+    }
+}

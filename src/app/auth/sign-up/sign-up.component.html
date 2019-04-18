@@ -1,0 +1,67 @@
+<div fxLayout='column' style='margin: 0 0 30px;'>
+  <div style="margin: auto;" class='width-setter'>
+    <h1 style="text-align:center; margin:30px 0 0;" class="mat-display-1">Welcome to CMS!! Please Register to our Website</h1>
+    <hr style="margin-bottom:30px;">
+    <form style="display:flex; flex-direction:column;"  (ngSubmit)='onSubmit()' [formGroup]='signUpForm'>
+      <ng-container [formGroupName]="'userDetails'">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input type='text' matInput placeholder="Username" name="username" [formControlName]="'username'">
+            <mat-error *ngIf='signUpForm.get("userDetails.username").invalid && signUpForm.get("userDetails.username").errors.required'>Please enter username</mat-error>
+            <mat-error *ngIf="signUpForm.get('userDetails.username').invalid && signUpForm.get('userDetails.username').errors.minlength">Please enter minimum 4 characters</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>FirstName</mat-label>
+            <input type='text' matInput placeholder="Firstname" name="firstname" [formControlName]="'firstname'">
+            <mat-error *ngIf='signUpForm.get("userDetails.firstname").invalid && signUpForm.get("userDetails.firstname").errors.required'>Please enter firstname</mat-error>
+            <mat-error *ngIf='signUpForm.get("userDetails.firstname").invalid && signUpForm.get("userDetails.firstname").errors.minlength'>Please enter minimum 4 characters</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Lastname</mat-label>
+            <input type='text' matInput placeholder="Lastname" name="lastname" [formControlName]="'lastname'">
+            <mat-error *ngIf="signUpForm.get('userDetails.lastname').invalid && signUpForm.get('userDetails.lastname').errors.required">Please enter lastname</mat-error>
+            <mat-error *ngIf="signUpForm.get('userDetails.lastname').invalid && signUpForm.get('userDetails.lastname').errors.minlength">Please enter minimum 4 characters</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+      <div style="width:100px;">
+        <img [src]='imgFromFileReaderData != null?imgFromFileReaderData:""' style="width:inherit;">
+        <a mat-raised-button color='accent' (click)='filetag.click()'>Select Image</a>
+      </div>
+
+
+      <br>
+      <div style="display:none;">
+        <input type='file' #filetag (change)='imageSelected($event)' [formControlName]="'image'">
+      </div>
+
+
+      <mat-error style="font-family: Roboto,'Helvetica Neue',sans-serif; font-size: 75%;" *ngIf='signUpForm.get("image").invalid'>Please select the image</mat-error>
+
+      <ng-container [formGroupName]='"credentials"'>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type='email' matInput placeholder="Email" name="email"  [formControlName]='"email"'>
+            <mat-error *ngIf='signUpForm.get("credentials.email").invalid && signUpForm.get("credentials.email").errors.required'>Please enter email address</mat-error>
+            <mat-error *ngIf='signUpForm.get("credentials.email").invalid && signUpForm.get("credentials.email").errors.email'>Please enter valid email address</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type='password' matInput placeholder="Password" name="password"  [formControlName]='"password"'>
+            <mat-error *ngIf='signUpForm.get("credentials.password").invalid && signUpForm.get("credentials.password").errors.required'>Please enter the password</mat-error>
+            <mat-error *ngIf='signUpForm.get("credentials.password").invalid && signUpForm.get("credentials.password").errors.minlength'>Password must be more than 4 charcaters</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+      <button mat-raised-button color='primary' type="submit" [disabled]='signUpForm.invalid'>Sign Up</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.left-side-navbar{
+  width:200px;
+  display: block !important;
+}
+.right-side-navbar{
+  width:200px;
+  display: block;
+}
+.displayer-none{
+  display: none;
+}
+
+.left-sidenav-button{
+  left: 135px;
+  z-index: 10000;
+}
+.right-sidenav-button{
+  right : 135px;
+  z-index: 10000;
+}
+
+@media screen and (max-width: 599px){
+  .height-setter{
+    height: 10vh;
+  }
+}

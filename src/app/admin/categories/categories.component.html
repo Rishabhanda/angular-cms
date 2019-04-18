@@ -1,0 +1,41 @@
+<div style='display:flex; flex-direction: row; height: 80vh; justify-content:center;'  *ngIf='isLoading' >
+    <app-page-loader *ngIf='isLoading' ></app-page-loader>
+</div>
+<div fxLayout.gt-sm='row' *ngIf='!isLoading' class='height-setter' fxLayout.lt-md='column' style='margin-top:40px;'>
+  <div fxLayout='column' fxFlex.gt-sm='40%'>
+    <form fxLayout='column' fxFlex.gt-sm='40%' (ngSubmit)='onSubmit(addCategoryForm)' #addCategoryForm='ngForm'>
+      <mat-form-field>
+        <input minlength="4" matInput placeholder="Add Category" ngModel name='cat_title' #catName='ngModel' required>
+        <mat-error *ngIf='catName.invalid && catName.touched && !catName.errors.minlength'>Please enter the category name</mat-error>
+        <mat-error *ngIf='catName.invalid && catName.touched && catName.errors.minlength'>Please enter minimum four characters</mat-error>
+      </mat-form-field>
+      <button [disabled]='!addCategoryForm.valid' type='submit' mat-raised-button color="primary">Add Category</button>
+    </form>
+  </div>
+  <div fxFlex.gt-sm='60%'>
+    <table mat-table [dataSource]='categories' style="width:90%; margin:auto;">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> No. </th>
+        <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.catId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Name </th>
+        <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.catName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"> Delete </th>
+          <td mat-cell *matCellDef="let element" style='cursor:pointer;text-align: center' (click)='deleteCategory($event)'> Delete </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"> Edit </th>
+          <td mat-cell *matCellDef="let element" style='cursor:pointer;text-align: center' (click)='editCategory($event)'> Edit </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.margin-setter{
+  margin:20px;
+}
+
+@media screen and (max-width: 599px){
+  .margin-setter{
+    margin:0;
+  }
+
+}

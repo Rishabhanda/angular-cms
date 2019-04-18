@@ -1,0 +1,8 @@
+.color-white{
+    color:#fff;
+}
+@media screen and (max-width: 599px){
+    .height-setter{
+      height: 80vh;
+    }
+  }

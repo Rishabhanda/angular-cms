@@ -1,0 +1,54 @@
+<div class='height-setter'>
+  <div  fxShow class='displayer-none' [class.left-side-navbar]='isSideLeftNavShown' #sidenavleft style='position: absolute; top:0; height:100%; z-index:1000; background-color:rgb(250, 250, 250);'>
+    <div style='display:flex; flex-direction: column; margin-top:60px;'>
+      <div *ngFor='let category of categories'>
+        <div *ngIf='!regex.test(currentRouteCheck.url)'>
+          <a href="javascript:;" mat-button disableRipple=true fxShow>{{category.catName | titlecase}}</a>
+        </div>
+      </div>
+      <div style='display:flex; flex-direction: column;' *ngIf='regex.test(currentRouteCheck.url)'>
+        <a mat-button routerLink='/admin' style='padding:15px 20px;'>Dashboard</a>
+        <a mat-button routerLink='/admin/posts' style='padding:15px 20px;'>Posts</a>
+        <a mat-button routerLink='/admin/categories' style='padding:15px 20px;'>Categories</a>
+        <a mat-button routerLink='/admin/users' style='padding:15px 20px;'>Users</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div fxShow class='displayer-none' [class.left-side-navbar]='isSideRightNavShown' #sidenavright style='position: absolute; top:0; right:0; height:100%; z-index:10000; display:none;background-color:rgb(250, 250, 250);'>
+    <div style='display:flex; flex-direction: column; margin-top:60px;'>
+      <a routerLink='/auth/signin' mat-button  disableRipple=true fxShow *ngIf='!isUserLoggedIn'>SignIn</a>
+      <a routerLink='/auth/signup' mat-button  disableRipple=true fxShow *ngIf='!isUserLoggedIn'>SignUp</a>
+      <a href="javascript:;" mat-button disableRipple=true fxShow *ngIf='isUserLoggedIn'><mat-icon>person_ooutline</mat-icon> Welcome {{userName}}</a>
+      <a routerLink='/{{regex.test(currentRouteCheck.url)?"":"admin"}}' mat-button  disableRipple=true fxShow *ngIf='userName'>{{regex.test(currentRouteCheck.url)?'Host':'Admin'}}</a>
+      <a routerLink='/' mat-button (click)='logout()' disableRipple=true fxShow *ngIf='isUserLoggedIn'>LogOut</a>
+    </div>
+  </div>
+
+    <div fxLayout='row' fxLayoutAlign='space-between' style="height:100%; background-color: rgb(250,250,250);">
+      <button [class.left-sidenav-button]='isSideLeftNavShown' (click)='sideNavLeftToggle()' mat-button fxHide fxShow.sm='true' fxShow.xs='true'><mat-icon>format_indent_increase</mat-icon></button>
+      <div fxLayout='row' fxLayoutAlign='start center'>
+        <a routerLink='/' mat-button fxFlex.gt-sm="2 0 calc(10em + 20px)"  disableRipple=true>Cms</a>
+        <div *ngFor='let category of categories'>
+          <ng-container *ngIf='!regex.test(currentRouteCheck.url)'>
+          <a href="javascript:;" mat-button disableRipple=true fxShow fxHide.sm='true' fxHide.xs='true'>{{category.catName | titlecase}}</a>
+          </ng-container>
+        </div>
+        <div fxFlex="2 0 calc(20em + 20px)" fxShow fxHide.sm='true' fxHide.xs='true' *ngIf='!regex.test(currentRouteCheck.url)'>
+          <mat-form-field style='width:100%; padding:0 20px;' fxShow fxHide.sm='true' fxHide.xs='true'>
+            <input matInput type="text" placeholder='search'>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout='row' fxLayoutAlign='start center' fxShow fxHide.sm='true' fxHide.xs='true'>
+        <a routerLink='/auth/signin' mat-button  disableRipple=true fxShow fxHide.sm='true' fxHide.xs='true' *ngIf='!isUserLoggedIn'>SignIn</a>
+        <a routerLink='/auth/signup' mat-button  disableRipple=true fxShow fxHide.sm='true' fxHide.xs='true' *ngIf='!isUserLoggedIn'>SignUp</a>
+        <a href="javascript:;" mat-button disableRipple=true fxShow fxHide.sm='true' fxHide.xs='true' *ngIf='isUserLoggedIn'><mat-icon>person_ooutline</mat-icon> Welcome {{userName}}</a>
+        <a routerLink='/{{regex.test(currentRouteCheck.url)?"":"admin"}}' mat-button  disableRipple=true fxShow fxHide.sm='true' fxHide.xs='true' *ngIf='userName'>{{regex.test(currentRouteCheck.url)?'Host':'Admin'}}</a>
+        <a routerLink='/' mat-button (click)='logout()' disableRipple=true fxShow fxHide.sm='true' fxHide.xs='true' *ngIf='isUserLoggedIn'>LogOut</a>
+      </div>
+      <button [class.right-sidenav-button]='isSideRightNavShown' (click)='sideNavRightToggle()' mat-button fxHide fxShow.sm='true' fxShow.xs='true'><mat-icon>format_indent_decrease</mat-icon></button>
+    </div>
+
+</div>

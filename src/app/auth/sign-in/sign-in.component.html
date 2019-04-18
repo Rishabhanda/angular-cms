@@ -1,0 +1,22 @@
+<div style='display:flex; flex-direction: row; height: 80vh; justify-content:center;'  *ngIf='isLoading' >
+  <app-page-loader *ngIf='isLoading' ></app-page-loader>
+</div>
+<div style='height:80vh;' *ngIf='!isLoading'>
+  <div fxLayout='column' fxFlex.gt-sm='30%' fxFlex.lt-md='80%' style='margin:50px auto;text-align:center;'>
+  <h2 class='mat-h1' style='margin:0;'>Please enter the Credentials to signin</h2>
+
+    <form (ngSubmit)="onSubmit(signInForm)" #signInForm='ngForm' style="display: flex; flex-direction: column; margin:auto 0;">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type='email' matInput placeholder="Email" required name="email" ngModel email #email='ngModel'>
+        <mat-hint *ngIf='email.touched && email.invalid'>Enter valid email address like abc@example.com</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Password" required name='password' ngModel #password='ngModel'>
+        <!-- <mat-hint *ngIf=''>Password must be  more than two characters</mat-hint> -->
+      </mat-form-field>
+      <button type='submit' mat-raised-button color="primary" [disabled]='!signInForm.valid'>Sign In</button>
+    </form>
+  </div>
+</div>

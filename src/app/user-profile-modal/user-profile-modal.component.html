@@ -1,0 +1,28 @@
+<p mat-dialog-title class='mat-h2'style='margin-bottom:0;'>{{data.heading }}</p>
+<mat-divider style="border-top-width: 2px;"></mat-divider>
+
+<mat-dialog-content style="margin-top:20px; display: flex; flex-direction: column;">
+    <div style='display: flex; justify-content: center;'>
+        <img src='../../assets/images/Rishab_sign.jpg' style="border-radius:50% 50%; width:100px; height:100px;">
+    </div>
+    <div style="display:flex; flex-direction:row; justify-content: center; margin-top: 30px;">
+        <div style="display:flex; flex-direction:column; flex-grow: 1" class='names k'>
+            <p><b>Username: </b></p>
+            <p><b>First Name: </b></p>
+            <p><b>Last Name: </b></p>
+            <p><b>Email: </b></p>
+            <p><b>Role: </b></p>
+        </div>
+        <div style="display:flex; flex-direction:column; flex-grow: 1" class='names'>
+            <p>{{data.data.userName}}</p>
+            <p>{{data.data.userFirstName}}</p>
+            <p>{{data.data.userLastName}}</p>
+            <p>{{data.data.userEmail}}</p>
+            <!-- <p>{{data.data.userRole}}</p> -->
+                <select [(ngModel)]='data.data.userRole' (change)='changeRole(data.id,selectTag.value)' #selectTag style='margin:15px 0 0;'>
+                    <option value="subscriber">subscriber</option>
+                    <option value="admin">admin</option>
+                </select>
+        </div>
+    </div>
+</mat-dialog-content>

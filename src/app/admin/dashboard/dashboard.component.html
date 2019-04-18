@@ -1,0 +1,48 @@
+<div style='display:flex; flex-direction: row; height: 80vh; justify-content:center;'  *ngIf='isLoading' >
+  <app-page-loader *ngIf='isLoading'  [setStyleLoader]='settingLoaderStyles'></app-page-loader>
+</div>
+<div class='height-setter' *ngIf='!isLoading'>
+  <div style='display:flex; flex-direction: row;'>
+    <div fxLayout.gt-sm='row' fxLayout.lt-md='column' style="justify-content: space-between;margin-top:20px;overflow: hidden; width:100%;">
+      <div fxFlex.lt-md='1 1 100%' fxFlex.gt-sm='30%' style="display:flex; flex-direction:column; border:2px solid #337ab7;border-radius:5px; margin-bottom: 20px;">
+        <div style="display:flex; flex-direction:row; justify-content: space-between;padding-bottom: 15px;background-color: #337ab7;">
+          <mat-icon class="color-white"  style="font-size:5em; height:1em;width: 1em;">event_note</mat-icon>
+          <div style="display:flex; flex-direction:column; margin:auto 0;">
+            <p class="color-white"  style="margin:0; font-size: 3em;">{{posts.length}}</p>
+            <p class="color-white"  style="margin:0">Posts</p>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:row; justify-content: space-between;cursor:pointer;background-color: #f5f5f5;">
+          <p style="margin:0;color:#337ab7;">View Detail</p>
+          <mat-icon style="color:#337ab7;">keyboard_tab</mat-icon>
+        </div>
+      </div>
+      <div fxFlex.lt-md='1 1 100%' fxFlex.gt-sm='30%' style="display:flex; flex-direction:column; border:2px solid #5cb85c;border-radius:5px; margin-bottom:20px;">
+        <div style="display:flex; flex-direction:row; justify-content: space-between; padding-bottom: 15px;background-color: #5cb85c;">
+          <mat-icon class="color-white"  style="font-size:5em; height:1em;width: 1em;">notes</mat-icon>
+          <div style="display:flex; flex-direction:column; margin:auto 0;">
+            <p class="color-white"  style="margin:0; font-size: 3em;">{{categories.length}} </p>
+            <p class="color-white"  style="margin:0">Categories</p>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:row; justify-content: space-between;cursor:pointer;background-color: #f5f5f5;">
+          <p style="margin:0;color:#5cb85c;">View Detail</p>
+          <mat-icon style="color:#5cb85c;">keyboard_tab</mat-icon>
+        </div>
+      </div>
+      <div fxFlex.lt-md='1 1 100%' fxFlex.gt-sm='30%' style="display:flex; flex-direction:column; border:2px solid #f0ad4e;border-radius:5px; margin-bottom:20px;">
+        <div style="display:flex; flex-direction:row; justify-content: space-between; padding-bottom:15px;background-color: #f0ad4e;">
+          <mat-icon class='color-white' style="font-size:5em; height:1em;width: 1em;">person_ooutline</mat-icon>
+          <div style="display:flex; flex-direction:column; margin:auto 0;">
+            <p class="color-white" style="margin:0; font-size: 3em;">{{users.length}} </p>
+            <p class="color-white"  style="margin:0">Users</p>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:row; justify-content: space-between;cursor:pointer;background-color: #f5f5f5;">
+          <p style="margin:0;color:#f0ad4e;">View Detail</p>
+          <mat-icon style='color:#f0ad4e;'>keyboard_tab</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

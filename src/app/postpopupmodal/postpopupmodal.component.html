@@ -1,0 +1,149 @@
+<!-- below code is for adding the post -->
+<ng-container *ngIf='data.heading=="Add New Post"'>
+  <p mat-dialog-title class='mat-h2'style='margin-bottom:0;'>{{data.heading }}</p>
+  <mat-divider style="border-top-width: 2px;"></mat-divider>
+
+  <mat-dialog-content style="margin-top:20px;">
+    <form (ngSubmit)='onSubmitAdd(formCategory)' #formCategory='ngForm' style="display:flex; flex-direction:column; width:90%; margin: auto;">
+      <mat-form-field>
+        <input minlength="4" matInput placeholder="Post Title" ngModel name='title' #postTitle='ngModel' required>
+        <mat-error *ngIf='postTitle.invalid && postTitle.touched && !postTitle.errors.minlength'>Please enter the Post Title</mat-error>
+        <mat-error *ngIf='postTitle.invalid && postTitle.touched && postTitle.errors.minlength'>Please enter minimum four characters</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Select a Category</mat-label>
+        <mat-select name='category_id' ngModel #postCategory='ngModel' required>
+          <mat-option *ngFor='let category of data.cat' value="{{category.catId}}">{{category.catName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf='postCategory.invalid && postCategory.touched'>Please enter the category name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input minlength="4" matInput placeholder="Post Author" ngModel name='author' #postAuthor='ngModel' required>
+        <mat-error *ngIf='postAuthor.invalid && postAuthor.touched && !postAuthor.errors.minlength'>Please enter the author name</mat-error>
+        <mat-error *ngIf='postAuthor.invalid && postAuthor.touched && postAuthor.errors.minlength'>Please enter minimum four characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Post Status</mat-label>
+        <mat-select name='status' ngModel required #postStatus='ngModel'>
+          <mat-option value="published">published</mat-option>
+          <mat-option value="draft">draft</mat-option>
+        </mat-select>
+        <mat-error *ngIf='postStatus.invalid && postStatus.touched'>Please select the Status of the post</mat-error>
+      </mat-form-field>
+
+        <div>
+          <img [src]='imageAddedUrl' style='width:50px' alt=''>
+          <br>
+          <a mat-raised-button color='accent' (click)='changeAddImage()'>Select Image</a>
+        </div>
+        <br>
+
+        <div style='display:none;'>  
+          <input type="file" placeholder='Post Image' ngModel #imageAddFileTag name="image" #postImage='ngModel' required (change)='fileAddedDisplay($event)'>
+          <mat-error *ngIf='postImage.touched && postImage.invalid && !postImage.value'>Please select the image</mat-error>
+        </div>
+
+      <mat-form-field>
+        <input type="text"  matInput placeholder="Post Tags" ngModel  name='tags' #postTags='ngModel' required>
+        <mat-error *ngIf='postTags.invalid && postTags.touched'>Please enter the category name</mat-error>
+        <!-- <mat-error *ngIf='catName.invalid && catName.touched && catName.errors.minlength'>Please enter minimum four characters</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea minlength="120" required ngModel name='content' matInput placeholder="Post Content" #postContent='ngModel'></textarea>
+        <mat-error *ngIf='postContent.invalid && postContent.touched && postContent.errors.minlength'>Please Enter Minimum 120 charcters</mat-error>
+        <mat-error *ngIf='postContent.invalid && postContent.touched && !postContent.errors.minlength'>Please Enter the content</mat-error>
+      </mat-form-field>
+
+      <div style="display:flex; flex-direction:row;" style='display:none;' >  
+        <button mat-raised-button color='primary' #submitter type="submit" #realSubmitButton [disabled]='!formCategory.valid'>Add Post</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align='end'>
+    <button mat-raised-button color='primary' [disabled]='!formCategory.valid' (click)='boomer()'>Add Post</button>
+    <button mat-raised-button color='warn'  [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</ng-container>
+
+
+
+
+<!-- -==----------------------------------------------------------------------------------------------------- -->
+
+<!-- below html for editing the post -->
+<ng-container *ngIf='data.heading=="Edit Post"'>
+  <p mat-dialog-title class='mat-h2'style='margin-bottom:0;'>{{data.heading }}</p>
+  <mat-divider style="border-top-width: 2px;"></mat-divider>
+
+  <mat-dialog-content style="margin-top:20px;">
+    <form (ngSubmit)='onSubmitEdit(formCategory)' #formCategory='ngForm' style="display:flex; flex-direction:column; width:90%; margin: auto;">
+      <mat-form-field>
+        <input minlength="4" matInput placeholder="Post Title" ngModel name='title' #postTitle='ngModel' required [(ngModel)]='data.post.title'>
+        <mat-error *ngIf='postTitle.invalid && postTitle.touched && !postTitle.errors.minlength'>Please enter the Post Title</mat-error>
+        <mat-error *ngIf='postTitle.invalid && postTitle.touched && postTitle.errors.minlength'>Please enter minimum four characters</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Select a Category</mat-label>
+        <mat-select name='category_id' ngModel #postCategory='ngModel' required [(ngModel)]='data.post.catId'>
+          <mat-option *ngFor='let category of data.cat' value="{{category.catId}}">{{category.catName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf='postCategory.invalid && postCategory.touched'>Please enter the category name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input minlength="4" matInput placeholder="Post Author" ngModel name='author' #postAuthor='ngModel' required [(ngModel)]='data.post.author'>
+        <mat-error *ngIf='postAuthor.invalid && postAuthor.touched && !postAuthor.errors.minlength'>Please enter the author name</mat-error>
+        <mat-error *ngIf='postAuthor.invalid && postAuthor.touched && postAuthor.errors.minlength'>Please enter minimum four characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Post Status</mat-label>
+        <mat-select name='status' ngModel required #postStatus='ngModel' [(ngModel)]='data.post.status'>
+          <mat-option value="published">published</mat-option>
+          <mat-option value="draft">draft</mat-option>
+        </mat-select>
+        <mat-error *ngIf='postStatus.invalid && postStatus.touched'>Please select the Status of the post</mat-error>
+      </mat-form-field>
+
+      <div>
+        <img [src]='!isImageChanged?"../../../../../images/"+data.post.image:imageUrl' style='width:50px' alt=''>
+        <br>
+        <a mat-raised-button color='accent' (click)='changeImageRequest = "true"' *ngIf='!changeImageRequest'>Change Image</a>
+        <a mat-raised-button color='accent' (click)='changeImage()' *ngIf='changeImageRequest'>Select Image</a>
+      </div>
+      <br>
+      
+      <!-- file tag for image uploading  -->
+      <div style='display:none;' *ngIf='changeImageRequest'>  
+        <input (change)='filetagImageChangeFunction($event)' type="file" placeholder='Post Image' ngModel name="image" #postImage='ngModel' #imageChangeFileTag required>
+        <mat-error *ngIf='postImage.touched && postImage.invalid && !postImage.value'>Please select the image</mat-error>
+      </div>
+
+      <mat-form-field>
+        <input type="text"  matInput placeholder="Post Tags" ngModel name='tags' #postTags='ngModel' required [(ngModel)]='data.post.tags'>
+        <mat-error *ngIf='postTags.invalid && postTags.touched'>Please enter the category name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea minlength="120" required ngModel name='content' matInput placeholder="Post Content" #postContent='ngModel' [(ngModel)]='data.post.content'></textarea>
+        <mat-error *ngIf='postContent.invalid && postContent.touched && postContent.errors.minlength'>Please Enter Minimum 120 charcters</mat-error>
+        <mat-error *ngIf='postContent.invalid && postContent.touched && !postContent.errors.minlength'>Please Enter the content</mat-error>
+      </mat-form-field>
+
+      <div style="display:flex; flex-direction:row;" style='display:none;' >  
+        <button mat-raised-button color='primary' #submitter type="submit" #realSubmitButton [disabled]='!formCategory.valid'>Edit Post</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align='end'>
+    <button mat-raised-button color='primary' [disabled]='!formCategory.valid' (click)='boomer()'>Edit Post</button>
+    <button mat-raised-button color='warn'  [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+  </mat-dialog-actions>
+</ng-container>

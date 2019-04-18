@@ -1,0 +1,17 @@
+<p mat-dialog-title class='mat-h2'style='margin-bottom:0;'>{{data.heading }}</p>
+<mat-divider style="border-top-width: 2px;"></mat-divider>
+
+<mat-dialog-content style="margin-top:20px;">
+  <form (ngSubmit)='onSubmit(editFormCategory)' #editFormCategory='ngForm'>
+    <mat-form-field style="width:100%;">
+      <input minlength="4"  matInput  name='cat_title' ngModel #editedCategoryName='ngModel' [(ngModel)]='data.catName' placeholder="Edit Category" required>
+      <mat-error *ngIf='editedCategoryName.invalid && editedCategoryName.touched && editedCategoryName.errors.minlength'>Please enter minimum four characters</mat-error>
+      <mat-error *ngIf='editedCategoryName.invalid && editedCategoryName.touched && !editedCategoryName.errors.minlength'>Please enter the new category </mat-error>
+    </mat-form-field>
+    <button style='display:none;' #submitButtonOriginal mat-raised-button color='primary' type="submit" [disabled]='!editFormCategory.valid'>Edit</button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align='end'>
+  <button mat-raised-button color='warn' (click)='boomer(submitButtonOriginal)' cdkFocusInitial>Edit</button>
+  <button mat-raised-button color='warn'  [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>
